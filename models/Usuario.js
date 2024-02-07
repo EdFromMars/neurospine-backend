@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import generarId from "../helpers/generarId.js";
+import bcrypt from "bcrypt";
 
 const UsuarioSchema = new mongoose.Schema({
   nombre: {
@@ -27,6 +29,26 @@ const UsuarioSchema = new mongoose.Schema({
     required: false,
     default: "Vendedor",
   },
+  token: {
+    type: String,
+    default: generarId(),
+  },
+  confirmado: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+UsuarioSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
+    return next();
+  }
+
+  const salt = await bcrypt.genSalt(10);
+  const hash = bcrypt.hash(this.password, salt);
+  this.password = hash;
+
+  next();
 });
 
 const Usuario = mongoose.model("Usuario", UsuarioSchema);

@@ -10,10 +10,6 @@ const registro = async (req, res) => {
 
   const existeEmail = await Usuario.findOne({ email });
 
-  
-  console.log(emaildominio);
-  console.log(existeEmail);
-
   if(existeEmail) {
     return res.status(400).json({msg: 'El correo ya esta registrado'});
   }
@@ -36,4 +32,26 @@ const perfil = (req, res) => {
   res.json('Desde API/USUARIOS/PERFIL');
 };
 
-export { registro, login, perfil };
+const confirmarEmail = async (req, res) => {
+  const { token } = req.params;
+
+  const usuarioConfirmar = await Usuario.findOne({ token });
+
+  if(!usuarioConfirmar) {
+    return res.status(400).json({ msg: 'El usuario no existe' });
+  }
+
+  try {
+    usuarioConfirmar.token = null;
+    usuarioConfirmar.confirmado = true;
+
+    await usuarioConfirmar.save();
+
+    res.json({ msg: 'Correo confirmado' });
+  } catch (error) {
+    console.log(error);
+  }
+
+};
+
+export { registro, login, perfil, confirmarEmail };
