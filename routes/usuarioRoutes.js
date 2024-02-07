@@ -1,9 +1,9 @@
 import express from 'express';
-import { registro, login, perfil, confirmarEmail } from '../controllers/usuarioControllers.js';
+import { registro, autenticar, perfil, confirmarEmail } from '../controllers/usuarioController.js';
 
 const router = express.Router();
 
-router.get('/', login);
+router.get('/', autenticar);
 router.post('/registro', registro);
 router.get('/perfil', perfil);
 router.get('/confirmar/:token', confirmarEmail);

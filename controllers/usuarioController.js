@@ -24,8 +24,24 @@ const registro = async (req, res) => {
   }  
 };
 
-const login = (req, res) => {
-  res.json('Desde API/USUARIOS/login');
+const autenticar = async (req, res) => {
+  const { email, password } = req.body;
+
+  const usuario = await Usuario.findOne({ email });
+
+  if(!usuario) {
+    return res.status(400).json({ msg: 'El usuario no existe' });
+  }
+
+  if(!usuario.confirmado) {
+    return res.status(400).json({ msg: 'El usuario no ha confirmado su correo' });
+  }
+
+  if(await usuario.compararPassword(password)) {
+    console.log('Password correcto');
+  }else {
+    return res.status(400).json({ msg: 'Password incorrecto' });
+  }
 };
 
 const perfil = (req, res) => {
@@ -54,4 +70,4 @@ const confirmarEmail = async (req, res) => {
 
 };
 
-export { registro, login, perfil, confirmarEmail };
+export { registro, autenticar, perfil, confirmarEmail };

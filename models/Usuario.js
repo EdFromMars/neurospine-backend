@@ -45,11 +45,15 @@ UsuarioSchema.pre("save", async function (next) {
   }
 
   const salt = await bcrypt.genSalt(10);
-  const hash = bcrypt.hash(this.password, salt);
+  const hash = await bcrypt.hash(this.password, salt);
   this.password = hash;
 
   next();
 });
+
+UsuarioSchema.methods.compararPassword = async function (password) {
+  return await bcrypt.compare(password, this.password);
+}
 
 const Usuario = mongoose.model("Usuario", UsuarioSchema);
 
