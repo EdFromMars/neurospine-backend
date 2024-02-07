@@ -1,11 +1,20 @@
 {
   "name": "neurospine-backend",
   "version": "1.0.0",
+  "type": "module",
   "description": "Administrador de Operaciones",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "author": "Eduardo Martinez",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^8.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
 }
