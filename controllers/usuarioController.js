@@ -1,4 +1,5 @@
 import Usuario from '../models/Usuario.js';
+import generarJWT from '../helpers/generarJWT.js';
 
 const registro = async (req, res) => {
   const { email } = req.body;
@@ -38,7 +39,7 @@ const autenticar = async (req, res) => {
   }
 
   if(await usuario.compararPassword(password)) {
-    console.log('Password correcto');
+    res.json({ token: generarJWT(usuario.id) });
   }else {
     return res.status(400).json({ msg: 'Password incorrecto' });
   }
