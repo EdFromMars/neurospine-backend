@@ -46,7 +46,8 @@ const autenticar = async (req, res) => {
 };
 
 const perfil = (req, res) => {
-  res.json('Desde API/USUARIOS/PERFIL');
+  const { usuario } = req;
+  res.json( usuario );
 };
 
 const confirmarEmail = async (req, res) => {
@@ -68,7 +69,6 @@ const confirmarEmail = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-
 };
 
 export { registro, autenticar, perfil, confirmarEmail };
