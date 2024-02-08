@@ -1,5 +1,6 @@
 import Usuario from '../models/Usuario.js';
 import generarJWT from '../helpers/generarJWT.js';
+import generarId from '../helpers/generarId.js';
 
 const registro = async (req, res) => {
   const { email } = req.body;
@@ -71,4 +72,63 @@ const confirmarEmail = async (req, res) => {
   }
 };
 
-export { registro, autenticar, perfil, confirmarEmail };
+const olvidePassword = async (req, res) => {
+  const { email } = req.body;
+  const existeUsuario = await Usuario.findOne({ email });
+
+  if(!existeUsuario) {
+    return res.status(400).json({ msg: 'El usuario no existe' });
+  }
+
+  try {
+    existeUsuario.token = generarId();
+    await existeUsuario.save();
+
+    res.json({ msg: 'Se ha enviado un correo para reestablecer el password' });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const comprobarToken = async (req, res) => {
+  const { token } = req.params;
+  const existeUsuario = await Usuario.findOne({ token });
+
+  if(existeUsuario) {
+    return res.json({ msg: 'Token valido' });
+  } else {
+    return res.status(400).json({ msg: 'Token no valido' });
+  }
+};
+
+const nuevoPassword = async (req, res) => {
+  console.log(req.params);
+  const { token } = req.params;
+  const { password } = req.body;
+  const usuario = await Usuario.findOne({ token });
+
+  if(!usuario) {
+    return res.status(400).json({ msg: 'Hubo un error' });
+  }
+
+  try {
+    usuario.password = password;
+    usuario.token = null;
+
+    await usuario.save();
+
+    res.json({ msg: 'Password actualizado' });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { 
+  registro, 
+  autenticar, 
+  perfil, 
+  confirmarEmail,
+  olvidePassword,
+  comprobarToken,
+  nuevoPassword
+};
