@@ -1,9 +1,10 @@
 import Usuario from '../models/Usuario.js';
 import generarJWT from '../helpers/generarJWT.js';
 import generarId from '../helpers/generarId.js';
+import emailRegistro from '../helpers/emailRegistro.js';
 
 const registro = async (req, res) => {
-  const { email } = req.body;
+  const { email, nombre } = req.body;
   
   const emaildominio = email.split('@')[1];
   if(emaildominio !== 'neurospine.com') {
@@ -19,6 +20,12 @@ const registro = async (req, res) => {
   try {
     const usuario = new Usuario(req.body);
     const usuarioGuardado = await usuario.save();
+
+    emailRegistro({
+      email, 
+      nombre, 
+      token: usuarioGuardado.token
+    });
 
     res.json(usuarioGuardado);
   } catch (error) {
