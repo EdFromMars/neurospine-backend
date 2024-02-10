@@ -27,7 +27,7 @@ const UsuarioSchema = new mongoose.Schema({
   puesto: {
     type: String,
     required: false,
-    default: "Vendedor",
+    default: null,
   },
   token: {
     type: String,
