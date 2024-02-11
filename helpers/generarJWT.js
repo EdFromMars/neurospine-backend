@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 
 const generarJWT = (id) => {
   return jwt.sign({ id }, process.env.SECRET_JWT_SEED, { 
-    expiresIn: '10d' 
+    expiresIn: "10d", 
   });
 };
 

@@ -25,6 +25,11 @@ const corsOptions = {
   }
 }
 
+app.use((req, res, next) => {
+  res.setHeader('Feature-Policy', "clipboard-write 'self'");
+  next();
+});
+
 app.use(cors(corsOptions));
 
 app.use('/api/usuarios', usuarioRoutes);

@@ -48,7 +48,12 @@ const autenticar = async (req, res) => {
   }
 
   if(await usuario.compararPassword(password)) {
-    res.json({ token: generarJWT(usuario.id) });
+    res.json({ 
+      _id: usuario.id,
+      nombre: usuario.nombre,
+      email: usuario.email,
+      token: generarJWT(usuario.id) 
+    });
   }else {
     return res.status(400).json({ msg: 'Password incorrecto' });
   }
