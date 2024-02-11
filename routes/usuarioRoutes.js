@@ -12,7 +12,7 @@ import checkAuth from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.get('/', autenticar);
+router.post('/', autenticar);
 router.post('/registro', registro);
 router.get('/confirmar/:token', confirmarEmail);
 router.post('/olvide-password', olvidePassword);

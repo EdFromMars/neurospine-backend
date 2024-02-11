@@ -13,11 +13,11 @@ dotenv.config();
 
 dbConnection();
 
-const dominiosPermitidos = ['http://localhost:5173'];
+const dominiosPermitidos = [process.env.FRONTEND_URL];
 
 const corsOptions = {
   origin: (origin, callback) => {
-    if (dominiosPermitidos.includes(origin)) {
+    if (dominiosPermitidos.includes(origin) !== -1) {
       callback(null, true);
     } else {
       callback(new Error('Dominio no permitido'));
