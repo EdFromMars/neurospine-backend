@@ -2,6 +2,7 @@ import Usuario from '../models/Usuario.js';
 import generarJWT from '../helpers/generarJWT.js';
 import generarId from '../helpers/generarId.js';
 import emailRegistro from '../helpers/emailRegistro.js';
+import emailOlvidePassword from '../helpers/emailOlvidePassword.js';
 
 const registro = async (req, res) => {
   const { email, nombre } = req.body;
@@ -90,6 +91,13 @@ const olvidePassword = async (req, res) => {
   try {
     existeUsuario.token = generarId();
     await existeUsuario.save();
+
+    //Enviar email con instrucciones para reestablecer el password
+    emailOlvidePassword({
+      email,
+      nombre: existeUsuario.nombre,
+      token: existeUsuario.token
+    });
 
     res.json({ msg: 'Se ha enviado un correo para reestablecer el password' });
   } catch (error) {
