@@ -44,16 +44,16 @@ const actualizarProducto = async (req, res) => {
   }
 
   //Actualizar Producto
-  producto.nombre = req.body.nombre || producto.nombre;
-  producto.tipo = req.body.tipo || producto.tipo;
-  producto.material_apoyo = req.body.material_apoyo || producto.material_apoyo;
-  producto.descripcion_extendida = req.body.descripcion_extendida || producto.descripcion_extendida;
+  producto.nombreMaterial = req.body.nombreMaterial || producto.nombreMaterial;
+  producto.tipoMaterial = req.body.tipoMaterial || producto.tipoMaterial;
+  producto.materialApoyo = req.body.materialApoyo || producto.materialApoyo;
+  producto.descripcionExtendida = req.body.descripcionExtendida || producto.descripcionExtendida;
   producto.cantidad_min = req.body.cantidad_min || producto.cantidad_min;
   producto.cantidad_max = req.body.cantidad_max || producto.cantidad_max;
   producto.existencias = req.body.existencias || producto.existencias;
   producto.alg = req.body.alg || producto.alg;
-  producto.precio_ga = req.body.precio_ga || producto.precio_ga;
-  producto.precio_default = req.body.precio_default || producto.precio_default;
+  producto.precioAngeles = req.body.precioAngeles || producto.precioAngeles;
+  producto.precioEstandar = req.body.precioEstandar || producto.precioEstandar;
   producto.usuario = req.body.usuario || producto.usuario;
 
   try {

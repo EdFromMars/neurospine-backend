@@ -2,32 +2,32 @@ import mongoose from "mongoose";
 import Usuario from "./Usuario.js";
 
 const productoSchema = new mongoose.Schema({
-  nombre: {
+  nombreMaterial: {
     type: String,
     required: true,
     trim: true,
   },
-  tipo: {
+  tipoMaterial: {
     type: String,
     required: true,
     trim: true,
   },
-  material_apoyo: {
+  materialApoyo: {
     type: Boolean,
     required: true,
     trim: true,
     default: false,
   },
-  descripcion_extendida: {
+  descripcionExtendida: {
     type: String,
     required: true,
     trim: true,
   },
-  cantidad_min: {
+  cantidadMin: {
     type: Number,
     required: true,
   },
-  cantidad_max: {
+  cantidadMax: {
     type: Number,
     required: true,
   },
@@ -45,11 +45,11 @@ const productoSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  precio_ga: {
+  precioAngeles: {
     type: Number,
     required: true,
   },
-  precio_default: {
+  precioEstandar: {
     type: Number,
     required: true,
   },
