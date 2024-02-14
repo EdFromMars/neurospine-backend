@@ -47,11 +47,11 @@ const productoSchema = new mongoose.Schema({
   },
   precioAngeles: {
     type: Number,
-    required: true,
+    required: false,
   },
   precioEstandar: {
     type: Number,
-    required: true,
+    required: false,
   },
   usuario: {
     type: mongoose.Schema.Types.ObjectId,

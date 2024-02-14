@@ -5,6 +5,7 @@ import cors from 'cors';
 
 import usuarioRoutes from './routes/usuarioRoutes.js';
 import productoRoutes from './routes/productoRoutes.js';
+import bitacoraRoutes from './routes/bitacoraRoutes.js';
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use(cors(corsOptions));
 
 app.use('/api/usuarios', usuarioRoutes);
 app.use('/api/productos', productoRoutes);
+app.use('/api/bitacora', bitacoraRoutes);
 
 const PORT = process.env.PORT || 4000;
 
