@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Usuario from "./Usuario";
+import Usuario from "./Usuario.js";
 
 const bitacoraSchema = new mongoose.Schema({
   usuario: {
@@ -7,12 +7,12 @@ const bitacoraSchema = new mongoose.Schema({
     ref: "Usuario",
     required: true,
   },
-  accion: {
+  descripcion: {
     type: String,
     required: true,
     trim: true,
   },
-  accionesLog: {
+  acciones: {
     type: String,
     required: true,
     trim: true,
