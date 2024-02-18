@@ -29,6 +29,11 @@ const UsuarioSchema = new mongoose.Schema({
     required: false,
     default: null,
   },
+  locacion: {
+    type: String,
+    trim: true,
+    required: true,
+  },
   token: {
     type: String,
     default: generarId(),

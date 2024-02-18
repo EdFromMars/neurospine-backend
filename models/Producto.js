@@ -58,6 +58,11 @@ const productoSchema = new mongoose.Schema({
     ref: "Usuario",
     required: true,
   },
+  locacion: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   fecha: {
     type: Date,
     default: Date.now,
