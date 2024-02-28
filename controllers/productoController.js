@@ -48,12 +48,13 @@ const actualizarProducto = async (req, res) => {
   producto.tipoMaterial = req.body.tipoMaterial || producto.tipoMaterial;
   producto.materialApoyo = req.body.materialApoyo || producto.materialApoyo;
   producto.descripcionExtendida = req.body.descripcionExtendida || producto.descripcionExtendida;
-  producto.cantidad_min = req.body.cantidad_min || producto.cantidad_min;
-  producto.cantidad_max = req.body.cantidad_max || producto.cantidad_max;
+  producto.cantidadMin = req.body.cantidadMin || producto.cantidadMin;
+  producto.cantidadMax = req.body.cantidadMax || producto.cantidadMax;
   producto.existencias = req.body.existencias || producto.existencias;
   producto.alg = req.body.alg || producto.alg;
   producto.precioAngeles = req.body.precioAngeles || producto.precioAngeles;
   producto.precioEstandar = req.body.precioEstandar || producto.precioEstandar;
+  producto.materialPrincipal = req.body.materialPrincipal || producto.materialPrincipal;
   producto.usuario = req.body.usuario || producto.usuario;
 
   try {

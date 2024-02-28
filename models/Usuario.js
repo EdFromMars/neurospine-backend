@@ -32,7 +32,7 @@ const UsuarioSchema = new mongoose.Schema({
   locacion: {
     type: String,
     trim: true,
-    required: true,
+    required: false,
   },
   token: {
     type: String,

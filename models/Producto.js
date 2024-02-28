@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
 import Usuario from "./Usuario.js";
 
 const productoSchema = new mongoose.Schema({
@@ -37,7 +37,7 @@ const productoSchema = new mongoose.Schema({
   },
   medida: {
     type: String,
-    required: true,
+    required: false,
     trim: true,
   },
   alg: {
@@ -52,6 +52,10 @@ const productoSchema = new mongoose.Schema({
   precioEstandar: {
     type: Number,
     required: false,
+  },
+  materialPrincipal: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Producto",
   },
   usuario: {
     type: mongoose.Schema.Types.ObjectId,
