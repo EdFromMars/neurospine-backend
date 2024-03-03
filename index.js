@@ -7,6 +7,7 @@ import usuarioRoutes from './routes/usuarioRoutes.js';
 import productoRoutes from './routes/productoRoutes.js';
 import bitacoraRoutes from './routes/bitacoraRoutes.js';
 import locacionesRoutes from './routes/locacionesRoutes.js';
+import zonaRoutes from './routes/zonasRoutes.js';
 
 const app = express();
 
@@ -39,6 +40,7 @@ app.use('/api/usuarios', usuarioRoutes);
 app.use('/api/productos', productoRoutes);
 app.use('/api/bitacora', bitacoraRoutes);
 app.use('/api/locaciones', locacionesRoutes);
+app.use('/api/zonas', zonaRoutes);
 
 const PORT = process.env.PORT || 4000;
 
