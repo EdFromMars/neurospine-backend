@@ -1,5 +1,6 @@
 import mongoose, { mongo } from "mongoose";
 import Usuario from "./Usuario.js";
+import Locaciones from "./Locaciones.js";
 
 const productoSchema = new mongoose.Schema({
   nombreMaterial: {
@@ -63,7 +64,8 @@ const productoSchema = new mongoose.Schema({
     required: true,
   },
   locacion: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Locaciones",
     required: true,
     trim: true,
   },
