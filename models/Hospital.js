@@ -7,7 +7,7 @@ const hospitalSchema = new mongoose.Schema({
     ref: "Zonas",
     required: true,
   },
-  nombre: {
+  nombreHospital: {
     type: String,
     required: true,
     trim: true,
