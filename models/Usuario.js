@@ -40,7 +40,6 @@ const UsuarioSchema = new mongoose.Schema({
   zona: {
     type: mongoose.Schema.Types.ObjectId,
     trim: true,
-    ref: "Zonas",
     required: false,
   },
   token: {
