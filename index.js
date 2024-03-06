@@ -9,6 +9,7 @@ import bitacoraRoutes from './routes/bitacoraRoutes.js';
 import locacionesRoutes from './routes/locacionesRoutes.js';
 import zonaRoutes from './routes/zonasRoutes.js';
 import hospitalRoutes from './routes/hospitalRoutes.js';
+import doctorRoutes from './routes/doctorRoutes.js';
 
 const app = express();
 
@@ -43,6 +44,7 @@ app.use('/api/bitacora', bitacoraRoutes);
 app.use('/api/locaciones', locacionesRoutes);
 app.use('/api/zonas', zonaRoutes);
 app.use('/api/hospitales', hospitalRoutes);
+app.use('/api/doctor', doctorRoutes);
 
 const PORT = process.env.PORT || 4000;
 
