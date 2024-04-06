@@ -44,7 +44,7 @@ app.use('/api/bitacora', bitacoraRoutes);
 app.use('/api/locaciones', locacionesRoutes);
 app.use('/api/zonas', zonaRoutes);
 app.use('/api/hospitales', hospitalRoutes);
-app.use('/api/doctor', doctorRoutes);
+app.use('/api/doctores', doctorRoutes);
 
 const PORT = process.env.PORT || 4000;
 

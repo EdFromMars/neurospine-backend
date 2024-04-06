@@ -32,6 +32,11 @@ const doctorSchema = new mongoose.Schema({
     required: false,
     trim: true,
   },
+  horario: {
+    type: String,
+    required: true,
+    trim: true,
+  },
 });
 
 const Doctor = mongoose.model("Doctor", doctorSchema);

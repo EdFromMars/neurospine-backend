@@ -12,8 +12,9 @@ const agregarDoctor = async (req, res) => {
 }
 
 const obtenerDoctores = async (req, res) => {
+  let hospital = req.query.hospital;
   try {
-    const doctores = await Doctor.find();
+    const doctores = await Doctor.find(hospital ? { hospital } : {});
     res.json(doctores);
   } catch (error) {
     console.log(error);
