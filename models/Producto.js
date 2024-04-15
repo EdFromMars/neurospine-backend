@@ -57,6 +57,7 @@ const productoSchema = new mongoose.Schema({
   materialPrincipal: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Producto",
+    required: false,
   },
   usuario: {
     type: mongoose.Schema.Types.ObjectId,

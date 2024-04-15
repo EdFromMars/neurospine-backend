@@ -36,11 +36,11 @@ const registro = async (req, res) => {
 
 const autenticar = async (req, res) => {
   const { email, password } = req.body;
-
+  
   const usuario = await Usuario.findOne({ email });
 
   if(!usuario) {
-    return res.status(400).json({ msg: 'El usuario no existe' });
+    return res.status(404).json({ msg: 'El usuario no existe' });
   }
 
   if(!usuario.confirmado) {

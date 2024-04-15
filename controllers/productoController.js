@@ -45,6 +45,7 @@ const actualizarProducto = async (req, res) => {
 
   //Actualizar Producto
   producto.nombreMaterial = req.body.nombreMaterial || producto.nombreMaterial;
+  producto.medida = req.body.medida || producto.medida;
   producto.tipoMaterial = req.body.tipoMaterial || producto.tipoMaterial;
   producto.materialApoyo = req.body.materialApoyo || producto.materialApoyo;
   producto.descripcionExtendida = req.body.descripcionExtendida || producto.descripcionExtendida;
