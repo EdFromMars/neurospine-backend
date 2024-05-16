@@ -30,6 +30,14 @@ const MaterialApoyoSchema = new mongoose.Schema({
     type: Number,
     required: false,
   },
+  precioRentaAngeles: {
+    type: Number,
+    required: false,
+  },
+  precioRentaEstandar: {
+    type: Number,
+    required: false,
+  },
   piezasSet: {
     type: String,
     required: true,
