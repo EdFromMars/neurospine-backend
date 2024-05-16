@@ -10,6 +10,8 @@ import locacionesRoutes from './routes/locacionesRoutes.js';
 import zonaRoutes from './routes/zonasRoutes.js';
 import hospitalRoutes from './routes/hospitalRoutes.js';
 import doctorRoutes from './routes/doctorRoutes.js';
+import razonSocialRoutes from './routes/razonSocialRoutes.js';
+import materialApoyoRoutes from './routes/materialApoyoRoutes.js';
 
 const app = express();
 
@@ -39,12 +41,14 @@ app.use((req, res, next) => {
 app.use(cors(corsOptions));
 
 app.use('/api/usuarios', usuarioRoutes);
-app.use('/api/productos', productoRoutes);
+app.use('/api/productos', productoRoutes, materialApoyoRoutes);
+app.use('/api/material-apoyo', materialApoyoRoutes);
 app.use('/api/bitacora', bitacoraRoutes);
 app.use('/api/locaciones', locacionesRoutes);
 app.use('/api/zonas', zonaRoutes);
 app.use('/api/hospitales', hospitalRoutes);
 app.use('/api/doctores', doctorRoutes);
+app.use('/api/razon-social', razonSocialRoutes);
 
 const PORT = process.env.PORT || 4000;
 

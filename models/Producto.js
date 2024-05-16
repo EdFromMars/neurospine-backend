@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 import Usuario from "./Usuario.js";
 import Locaciones from "./Locaciones.js";
 
@@ -12,12 +12,6 @@ const productoSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-  },
-  materialApoyo: {
-    type: Boolean,
-    required: true,
-    trim: true,
-    default: false,
   },
   descripcionExtendida: {
     type: String,
@@ -58,6 +52,7 @@ const productoSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Producto",
     required: false,
+    default: null,
   },
   usuario: {
     type: mongoose.Schema.Types.ObjectId,
