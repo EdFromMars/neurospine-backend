@@ -12,6 +12,7 @@ import hospitalRoutes from './routes/hospitalRoutes.js';
 import doctorRoutes from './routes/doctorRoutes.js';
 import razonSocialRoutes from './routes/razonSocialRoutes.js';
 import materialApoyoRoutes from './routes/materialApoyoRoutes.js';
+import programacionRoutes from './routes/programacionRoutes.js';
 
 const app = express();
 
@@ -49,6 +50,7 @@ app.use('/api/zonas', zonaRoutes);
 app.use('/api/hospitales', hospitalRoutes);
 app.use('/api/doctores', doctorRoutes);
 app.use('/api/razon-social', razonSocialRoutes);
+app.use('/api/programacion', programacionRoutes);
 
 const PORT = process.env.PORT || 4000;
 
