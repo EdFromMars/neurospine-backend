@@ -24,10 +24,9 @@ const programacionSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  formaPago: {
-    type: String,
-    required: true,
-    trim: true,
+  iva: {
+    type: Boolean,
+    required: true
   },
   fechaCirugia: {
     type: String,
@@ -79,6 +78,20 @@ const programacionSchema = new mongoose.Schema({
     type: String,
     required: false,
     trim: true,
+  },
+  asistencia: {
+    type: Boolean,
+    required: true,
+    default: false
+  },
+  montoAsistencia: {
+    type: Number,
+    required: false,
+  },
+  viaticos: {
+    type: Boolean,
+    required: false,
+    default: false
   },
   productos: {
     type: String,

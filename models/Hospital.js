@@ -12,6 +12,11 @@ const hospitalSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  tipoRegistro: {
+    type: String,
+    required: true,
+    trim: true,
+  },
 });
 
 const Hospital = mongoose.model("Hospital", hospitalSchema);

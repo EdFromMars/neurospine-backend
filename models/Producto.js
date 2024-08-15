@@ -30,6 +30,14 @@ const productoSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  reservas: {
+    type: Number,
+    required: false,
+  },
+  consigna: {
+    type: Number,
+    required: false,
+  },
   medida: {
     type: String,
     required: false,
