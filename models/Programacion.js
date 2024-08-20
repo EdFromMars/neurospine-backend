@@ -112,6 +112,11 @@ const programacionSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  activa: {
+    type: Boolean,
+    required: true,
+    default: false
+  },
 });
 
 const ProgramacionModel = mongoose.model("Programacion", programacionSchema);
