@@ -28,6 +28,11 @@ const programacionSchema = new mongoose.Schema({
     type: Boolean,
     required: true
   },
+  datosFacturacion: {
+    type: String,
+    required: false,
+    trim: true,
+  },
   fechaCirugia: {
     type: String,
     required: true,
@@ -117,6 +122,11 @@ const programacionSchema = new mongoose.Schema({
     required: true,
     default: false
   },
+  pagada: {
+    type: Boolean,
+    required: true,
+    default: false
+  }
 });
 
 const ProgramacionModel = mongoose.model("Programacion", programacionSchema);

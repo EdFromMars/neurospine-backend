@@ -48,7 +48,8 @@ const actualizarProgramacion = async (req, res) => {
   programacion.tipoProgramacion = req.body.tipoProgramacion || programacion.tipoProgramacion;
   programacion.tipoCirugia = req.body.tipoCirugia || programacion.tipoCirugia;
   programacion.tipoVenta = req.body.tipoVenta || programacion.tipoVenta;
-  programacion.formaPago = req.body.formaPago || programacion.formaPago;
+  programacion.iva = req.body.iva || programacion.iva;
+  programacion.datosFacturacion = req.body.datosFacturacion || programacion.datosFacturacion;
   programacion.fechaCirugia = req.body.fechaCirugia || programacion.fechaCirugia;
   programacion.horaCirugia = req.body.horaCirugia || programacion.horaCirugia;
   programacion.fechaEntrega = req.body.fechaEntrega || programacion.fechaEntrega;
@@ -60,9 +61,15 @@ const actualizarProgramacion = async (req, res) => {
   programacion.responsableMaterial = req.body.responsableMaterial || programacion.responsableMaterial;
   programacion.empresaResponsable = req.body.empresaResponsable || programacion.empresaResponsable;
   programacion.observaciones = req.body.observaciones || programacion.observaciones;
+  programacion.asistencia = req.body.asistencia || programacion.asistencia;
+  programacion.montoAsistencia = req.body.montoAsistencia || programacion.montoAsistencia;
+  programacion.viaticos = req.body.viaticos || programacion.viaticos;
   programacion.productos = req.body.productos || programacion.productos;
   programacion.materialApoyo = req.body.materialApoyo || programacion.materialApoyo;
   programacion.usuario = req.body.usuario || programacion.usuario;
+  programacion.fecha = req.body.fecha || programacion.fecha;
+  programacion.activa = req.body.activa || programacion.activa;
+  programacion.pagada = req.body.pagada || programacion.pagada;
 }
 
 const eliminarProgramacion = async (req, res) => {
