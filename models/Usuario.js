@@ -50,6 +50,10 @@ const UsuarioSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  bloqueado: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 UsuarioSchema.pre("save", async function (next) {

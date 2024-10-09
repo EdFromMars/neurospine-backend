@@ -47,6 +47,10 @@ const autenticar = async (req, res) => {
     return res.status(400).json({ msg: 'El usuario no ha confirmado su correo' });
   }
 
+  if(usuario.bloqueado) {
+    return res.status(400).json({ msg: 'El usuario esta bloqueado' });
+  }
+
   if(await usuario.compararPassword(password)) {
     res.json({ 
       _id: usuario.id,
@@ -145,6 +149,35 @@ const nuevoPassword = async (req, res) => {
   }
 };
 
+const obtenerUsuarios = async (req, res) => {
+  try {
+    const usuarios = await Usuario.find()
+      .select('-password -token -confirmado -createdAt -updatedAt -__v');
+    res.json(usuarios);
+  } catch (error) {
+    console.error('Error al obtener usuarios:', error);
+    res.status(500).json({ msg: 'Error al obtener usuarios' });
+  }
+};
+
+const bloquearUsuario = async (req, res) => {
+  const { id } = req.params;
+  const usuario = await Usuario.findById(id);
+
+  if (!usuario) {
+    return res.status(404).json({ msg: 'Usuario no encontrado' });
+  }
+
+  try {
+    usuario.bloqueado = true;
+    await usuario.save();
+    res.json({ msg: 'Usuario bloqueado' });
+  } catch (error) {
+    console.error('Error al bloquear usuario:', error);
+    res.status(500).json({ msg: 'Error al bloquear usuario' });
+  }
+};
+
 export { 
   registro, 
   autenticar, 
@@ -152,5 +185,6 @@ export {
   confirmarEmail,
   olvidePassword,
   comprobarToken,
-  nuevoPassword
+  nuevoPassword,
+  obtenerUsuarios
 };
