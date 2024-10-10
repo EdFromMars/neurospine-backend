@@ -48,7 +48,7 @@ const autenticar = async (req, res) => {
   }
 
   if(usuario.bloqueado) {
-    return res.status(400).json({ msg: 'El usuario esta bloqueado' });
+    return res.status(400).json({ msg: 'El acceso esta bloqueado' });
   }
 
   if(await usuario.compararPassword(password)) {
