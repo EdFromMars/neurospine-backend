@@ -6,7 +6,7 @@ import {
   confirmarEmail,
   olvidePassword,
   comprobarToken,
-  nuevoPassword
+  nuevoPassword,
 } from '../controllers/usuarioController.js';
 import checkAuth from '../middleware/authMiddleware.js';
 

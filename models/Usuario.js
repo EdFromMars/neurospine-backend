@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 import generarId from "../helpers/generarId.js";
 import bcrypt from "bcrypt";
 import Locaciones from "./Locaciones.js";
-import Zonas from "./Zonas.js";
 
 const UsuarioSchema = new mongoose.Schema({
   nombre: {
@@ -37,8 +36,8 @@ const UsuarioSchema = new mongoose.Schema({
     ref: "Locaciones",
     required: false,
   },
-  zona: {
-    type: mongoose.Schema.Types.ObjectId,
+  zonas: {
+    type: String,
     trim: true,
     required: false,
   },

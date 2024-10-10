@@ -186,5 +186,6 @@ export {
   olvidePassword,
   comprobarToken,
   nuevoPassword,
-  obtenerUsuarios
+  obtenerUsuarios,
+  bloquearUsuario
 };
