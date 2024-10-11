@@ -128,7 +128,6 @@ const comprobarToken = async (req, res) => {
 };
 
 const nuevoPassword = async (req, res) => {
-  console.log(req.params);
   const { token } = req.params;
   const { password } = req.body;
   const usuario = await Usuario.findOne({ token });
@@ -160,18 +159,30 @@ const obtenerUsuarios = async (req, res) => {
   }
 };
 
-const bloquearUsuario = async (req, res) => {
+const actualizarUsuario = async (req, res) => {
   const { id } = req.params;
   const usuario = await Usuario.findById(id);
 
   if (!usuario) {
     return res.status(404).json({ msg: 'Usuario no encontrado' });
   }
+  if(usuario._id.toString() !== req.body._id.toString()) {
+    return res.status(401).json({ msg: 'No autorizado' });
+  }
+
+  console.log(req.body);
+  console.log(req.body.bloqueado);
+
+  //Actualizar usuario
+  usuario.nombre = req.body.nombre || usuario.nombre;
+  usuario.puesto = req.body.puesto || usuario.puesto;
+  usuario.locacion = req.body.locacion || usuario.locacion;
+  usuario.zonas = req.body.zonas || usuario.zonas;
+  usuario.bloqueado = req.body.bloqueado === true || false;
 
   try {
-    usuario.bloqueado = true;
-    await usuario.save();
-    res.json({ msg: 'Usuario bloqueado' });
+    const usuarioActualizado = await usuario.save();
+    res.json(usuarioActualizado);
   } catch (error) {
     console.error('Error al bloquear usuario:', error);
     res.status(500).json({ msg: 'Error al bloquear usuario' });
@@ -187,5 +198,5 @@ export {
   comprobarToken,
   nuevoPassword,
   obtenerUsuarios,
-  bloquearUsuario
+  actualizarUsuario
 };
