@@ -9,7 +9,7 @@ const registro = async (req, res) => {
   
   const emaildominio = email.split('@')[1];
   if(emaildominio !== 'neurospine.com') {
-    return res.status(400).json({msg: 'Correo no valido, debe ser de la empresa Neurospine.com'});
+    return res.status(400).json({msg: 'Correo no valido'});
   }
 
   const existeEmail = await Usuario.findOne({ email });
@@ -159,6 +159,13 @@ const obtenerUsuarios = async (req, res) => {
   }
 };
 
+const obtenerUsuario = async (req, res) => {
+  const { id } = req.params;
+  const usuario = await Usuario.findById(id)
+    .select('-password -token -confirmado -createdAt -updatedAt -__v');
+  res.json(usuario);
+};
+
 const actualizarUsuario = async (req, res) => {
   const { id } = req.params;
   const usuario = await Usuario.findById(id);
@@ -169,9 +176,6 @@ const actualizarUsuario = async (req, res) => {
   if(usuario._id.toString() !== req.body._id.toString()) {
     return res.status(401).json({ msg: 'No autorizado' });
   }
-
-  console.log(req.body);
-  console.log(req.body.bloqueado);
 
   //Actualizar usuario
   usuario.nombre = req.body.nombre || usuario.nombre;
@@ -198,5 +202,6 @@ export {
   comprobarToken,
   nuevoPassword,
   obtenerUsuarios,
+  obtenerUsuario,
   actualizarUsuario
 };
