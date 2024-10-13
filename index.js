@@ -1,6 +1,6 @@
 import express from 'express';
 import dbConnection from './config/db.js';
-import dbEvents from './config/dbEvents.js';
+import { dbEvents, connectToMongo } from './config/dbEvents.js';
 import dotenv from 'dotenv';
 import cors from 'cors';
 
@@ -73,8 +73,7 @@ function sendEventToAll(eventData) {
 
 app.options('/events', cors(corsOptions));
 
-app.get('/events', cors(corsOptions), (req, res) => {
-
+app.get('/events', cors(corsOptions), async (req, res) => {
   res.writeHead(200, {
     'Content-Type': 'text/event-stream',
     'Cache-Control': 'no-cache',
@@ -94,38 +93,39 @@ app.get('/events', cors(corsOptions), (req, res) => {
     clients.delete(newClient);
   });
 
-  // Envía un mensaje inicial para establecer la conexión
-  res.write(`data: ${JSON.stringify({message: 'Conexión establecida'})}\n\n`);
+  const sendEvent = (data) => {
+    res.write(`data: ${data}\n\n`);
+  };
 
-  // Mantén la conexión abierta con un heartbeat
-  const intervalId = setInterval(() => {
-    res.write(`data: ${JSON.stringify({message: 'heartbeat', timestamp: new Date().toISOString()})}\n\n`);
-  }, 5000);
-
-  req.on('close', () => {
-    clearInterval(intervalId);
-  });
-}, (error, req, res, next) => {
-  console.log('Error en la ruta /events:', error.message);
-  res.status(500).json({ mensaje: 'Error interno del servidor' });
+  try {
+    await dbEvents(sendEvent);
+  } catch (error) {
+    console.error('Error en dbEvents:', error);
+    sendEvent(JSON.stringify({ type: 'error', message: 'Error en la conexión de eventos' }));
+  }
 });
-
 
 const PORT = process.env.PORT || 4000;
 
 async function startServer() {
   try {
-    await dbEvents();
-    
-    console.log('Eventos de base de datos iniciados correctamente');
-    
+    await connectToMongo();
+    const server = app.listen(PORT, () => {
+      console.log(`Servidor corriendo en el puerto ${server.address().port}`);
+    });
+
+    server.on('error', (error) => {
+      if (error.code === 'EADDRINUSE') {
+        console.log(`Puerto ${PORT} está en uso, intentando con el puerto ${PORT + 1}`);
+        server.close();
+        startServer(PORT + 1);
+      } else {
+        console.error('Error al iniciar el servidor:', error);
+      }
+    });
   } catch (error) {
-    console.error('Error al iniciar eventos de base de datos:', error);
+    console.error('Error al iniciar el servidor:', error);
   }
-  
 }
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
 startServer().catch(console.error);
