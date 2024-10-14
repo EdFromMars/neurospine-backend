@@ -98,6 +98,10 @@ const programacionSchema = new mongoose.Schema({
     required: false,
     default: false
   },
+  viaticosMonto: {
+    type: Number,
+    required: false,
+  },
   productos: {
     type: String,
     required: true,

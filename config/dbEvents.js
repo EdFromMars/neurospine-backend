@@ -30,24 +30,31 @@ async function dbEvents(sendEvent) {
   try {
     await connectToMongo();
     const database = client.db(process.env.DB_NAME);
-    const collection = database.collection('usuarios');
+    //Lista de colecciones a observar
+    const collections = ['usuarios', 'productos', 'programacions', 'materialapoyos'];
+    
+    //Crear un changeStream por cada colección
+    const changeStreams = collections.map(coleccion => {
+      const collection = database.collection(coleccion);
+      const stream = collection.watch();
 
-    changeStream = collection.watch();
-
-    changeStream.on('change', (change) => {
-      console.log('Cambio detectado:', change);
-      const mensaje = JSON.stringify({
-        type: 'change',
-        collection: change.ns.coll,
-        operationType: change.operationType,
-        documentKey: change.documentKey
+      stream.on('change', (change) => {
+        console.log('Cambio detectado:', change);
+        const mensaje = JSON.stringify({
+          type: 'change',
+          collection: change.ns.coll,
+          operationType: change.operationType,
+          documentKey: change.documentKey
+        });
+        sendEvent(mensaje);
       });
-      sendEvent(mensaje);
+
+      return stream;
     });
 
     sendEvent(JSON.stringify({ type: 'connection', message: 'Conexión establecida con la base de datos' }));
 
-    return changeStream;
+    return changeStreams;
   } catch (error) {
     console.error('Error en dbEvents:', error);
     sendEvent(JSON.stringify({ type: 'error', message: 'Error al conectar con la base de datos' }));
@@ -57,7 +64,7 @@ async function dbEvents(sendEvent) {
 
 process.on('SIGINT', async () => {
   if (changeStream) {
-    await changeStream.close();
+    await Promise.all(changeStreams.map(stream => stream.close()));
   }
   if (isConnected) {
     await client.close();
