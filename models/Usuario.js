@@ -25,6 +25,11 @@ const UsuarioSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  direccion: {
+    type: String,
+    required: false,
+    trim: true,
+  },
   puesto: {
     type: String,
     required: false,
@@ -37,7 +42,7 @@ const UsuarioSchema = new mongoose.Schema({
     required: false,
   },
   zonas: {
-    type: String,
+    type: Array,
     trim: true,
     required: false,
   },
@@ -52,6 +57,10 @@ const UsuarioSchema = new mongoose.Schema({
   bloqueado: {
     type: Boolean,
     default: false,
+  },
+  documentos: {
+    type: Array,
+    required: false,
   },
 });
 

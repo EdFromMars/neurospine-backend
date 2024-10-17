@@ -179,11 +179,15 @@ const actualizarUsuario = async (req, res) => {
 
   //Actualizar usuario
   usuario.nombre = req.body.nombre || usuario.nombre;
+  usuario.telefono = req.body.telefono || usuario.telefono;
+  usuario.direccion = req.body.direccion || usuario.direccion;
   usuario.puesto = req.body.puesto || usuario.puesto;
   usuario.locacion = req.body.locacion || usuario.locacion;
   usuario.zonas = req.body.zonas || usuario.zonas;
   usuario.bloqueado = req.body.bloqueado === true || false;
-
+  usuario.documentos = req.body.documentos || usuario.documentos;
+  usuario.password = req.body.password || usuario.password;
+  
   try {
     const usuarioActualizado = await usuario.save();
     res.json(usuarioActualizado);
