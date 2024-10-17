@@ -16,6 +16,7 @@ import materialApoyoRoutes from './routes/materialApoyoRoutes.js';
 import programacionRoutes from './routes/programacionRoutes.js';
 import usuariosRoutes from './routes/usuariosRoutes.js';
 import equipoRoutes from './routes/equipoRoutes.js';
+import piezasMaterialApoyoRoutes from './routes/piezasMaterialApoyoRoutes.js';
 
 const app = express();
 
@@ -53,6 +54,7 @@ app.use((req, res, next) => {
 app.use('/api/usuarios', usuarioRoutes);
 app.use('/api/productos', productoRoutes, materialApoyoRoutes);
 app.use('/api/material-apoyo', materialApoyoRoutes);
+app.use('/api/piezas-material-apoyo', piezasMaterialApoyoRoutes);
 app.use('/api/bitacora', bitacoraRoutes);
 app.use('/api/locaciones', locacionesRoutes);
 app.use('/api/zonas', zonaRoutes);
