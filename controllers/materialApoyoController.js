@@ -50,7 +50,6 @@ const actualizarMaterialApoyo = async (req, res) => {
   materialApoyo.alg = req.body.alg || materialApoyo.alg;
   materialApoyo.precioAngeles = req.body.precioAngeles || materialApoyo.precioAngeles;
   materialApoyo.precioEstandar = req.body.precioEstandar || materialApoyo.precioEstandar;
-  materialApoyo.piezasSet = req.body.piezasSet || materialApoyo.piezasSet;
   materialApoyo.locacion = req.body.locacion || materialApoyo.locacion;
 
   const materialApoyoActualizado = await materialApoyo.save();
