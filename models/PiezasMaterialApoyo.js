@@ -18,6 +18,10 @@ const PiezasMaterialApoyoSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  cantidad: {
+    type: Number,
+    required: true,
+  },
   locacion: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Locaciones",
